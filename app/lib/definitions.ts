@@ -34,6 +34,14 @@ export type PriceData = {
   price: string;
 };
 
+export type PriceDataByPropertyType = {
+  transfer_date: string;
+  terraced: string;
+  semi_detached: string;
+  detached: string;
+  flats: string;
+};
+
 export type SampleData = {
   month: string;
   price: number;
