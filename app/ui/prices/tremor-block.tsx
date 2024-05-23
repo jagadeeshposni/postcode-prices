@@ -25,7 +25,7 @@ export default function Example
     <>
       <Card className="m-4 sm:mx-auto sm:max-w-full  ">
         <h3 className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-          House Prices Sold
+          House Prices Index by Property Type
         </h3>
         <AreaChart
           data={data}

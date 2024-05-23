@@ -1,6 +1,5 @@
 # Use the official Node.js image as the base  
 FROM node:18-alpine
-RUN apk add --update --no-cache python3 build-base gcc && ln -sf /usr/bin/python3 /usr/bin/python
 
 # Set the working directory inside the container  
 WORKDIR /app  
