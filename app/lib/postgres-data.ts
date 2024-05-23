@@ -1,11 +1,5 @@
-import { sql } from '@vercel/postgres';
-import { createClient } from '@vercel/postgres';
 const { Pool } = require('pg');
 
-import {
-  PriceData,
-  SampleType,
-} from './definitions';
 
 // export async function getPriceData(postcode: string,
 //   currentPage: number,

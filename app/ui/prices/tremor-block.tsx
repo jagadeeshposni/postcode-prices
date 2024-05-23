@@ -1,6 +1,6 @@
 'use client';
-import { PriceData, PriceDataByPropertyType } from '@/app/lib/definitions';
-import { AreaChart, Card, LineChart, List, ListItem } from '@tremor/react';
+import { PriceDataByPropertyType } from '@/app/lib/definitions';
+import { AreaChart, Card } from '@tremor/react';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

@@ -1,4 +1,3 @@
-import { AreaChart } from '@tremor/react';
 import { fetchSampleData } from '@/app/lib/postgres-data';
 import Example from './tremor-block';
 
