@@ -56,7 +56,7 @@ export async function fetchSampleData(query: string) {
     ROUND(AVG(CASE WHEN property_type = 'D' THEN price ELSE NULL END))::INTEGER AS detached_houses_average_price,
     ROUND(AVG(CASE WHEN property_type = 'F' THEN price ELSE NULL END))::INTEGER AS flats_average_price
     FROM 
-        price_paid_complete
+        sample
     WHERE
         postcode like $1 || '%'
     GROUP BY 
