@@ -1,40 +1,42 @@
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
-import Link from 'next/link';
+import { lusitana } from '@/app/ui/fonts';
+import Search from '@/app/ui/search';
+import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { Suspense } from 'react';
+import HouseTypeSwitches from './ui/dashboard/house-type-switches';
+import { fetchRealData, fetchSampleData } from './lib/postgres-data';
+import PricesChart from './ui/search/prices-chart';
+import { PriceDataByPropertyType } from './lib/definitions';
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
+  // const data = await fetchSampleData(query);
+  let data: PriceDataByPropertyType[] = [];
+  if (query) {
+    data = await fetchRealData(query);
+  }
+  //TODO: Explore tailwind snippets
   return (
-    <main className="flex min-h-screen flex-col p-6">
-     
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Search Price Index by Postcode</strong>
-          </p>
-          <Link
-            href="/search"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Start</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
-        </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          <Image
-            src="/house_dalle.jpg"
-            width={1000}
-            height={760}
-            className="hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-           />
-           <Image
-            src="/house_dalle_mobile.jpg"
-            width={500}
-            height={620}
-            className="block md:hidden"
-            alt="Screenshots of the dashboard project showing mobile version"
-           />
-        </div>
+    <div>
+      <div className="flex w-auto items-center justify-between">
+        <h1 className={`${lusitana.className} text-2xl`}>House Prices Index by Postcode</h1>
       </div>
-    </main>
+
+      <div className="c mt-4 items-center justify-between">
+        <Search placeholder="Search postcode..." />
+        <HouseTypeSwitches />
+      </div>
+
+      <div>
+        <Suspense key={query} fallback={<InvoicesTableSkeleton />}>
+          <PricesChart data={data} />
+        </Suspense>
+      </div>
+    </div>
   );
 }
